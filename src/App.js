@@ -9,9 +9,13 @@ class App extends React.Component {
     imgSrc:"./workathomeagent.jpg",
      profession:"Développeur web full stack     "},
     show : true,
+    count: 0
+
   };
 }
   render(){
+    const count = this.state.count
+
    return (
     <div className="App">
       {
@@ -21,13 +25,21 @@ class App extends React.Component {
         <h1>{this.state.Person.bio}</h1>
         <div><img src={this.state.Person.imgSrc} alt={"Mahdi"}style={{width:1000}}></img></div>
         <h1>{this.state.Person.profession}</h1>
+        <h1>Current Count : {count}</h1>
+
       </div>
       :null
       }
       <button onClick={()=>this.setState({...this.state,show:!this.state.show})}>Hide/Show</button>
     </div>)
   }
-
+  componentDidMount() {
+    this.myInterval = setInterval (()=>{
+      this.setState(prevState => ({
+        count: prevState.count + 1
+    }))
+  }, 1000)
+  }
 
 
   componentWillUnmount() {
